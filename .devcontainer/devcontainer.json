@@ -1,0 +1,23 @@
+{
+    "image": "ghcr.io/whynotea/devcontainer-golang:latest",
+    "features": {
+    },
+    "runArgs": [
+    "--security-opt",
+    "label=disable",
+    "--device",
+    "/dev/fuse",
+    "--userns=keep-id"
+    ],
+    "customizations": {
+      "vscode": {
+        "settings": {
+
+        },
+        "extensions": [
+
+        ]
+      }
+    },
+    "remoteUser": "code"
+
