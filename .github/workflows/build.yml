@@ -1,15 +1,21 @@
 name: 'build'
 on:
   push:
+    tags:
+    - '*'
 
 jobs:
-  build-examples:
+  build:
     runs-on: [self-hosted, linux, x64]
+
+    permissions:
+      contents: read
+      packages: write
 
     steps:
 
       - name: Checkout (GitHub)
         uses: actions/checkout@v3
 
-      - name: Build
-        run: make all-build
+      - name: Build and Package
+        run: echo "TODO"
