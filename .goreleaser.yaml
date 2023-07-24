@@ -43,6 +43,20 @@ changelog:
       - '^docs:'
       - '^test:'
 
+# create a docker image
+# https://goreleaser.com/customization/docker
+dockers:
+- image_templates:
+  - 'ghcr.io/whynotea/go-examples:{{ .Tag }}'
+  dockerfile: Containerfile
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+
 # The lines beneath this are called `modelines`. See `:help modeline`
 # Feel free to remove those if you don't want/use them.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
