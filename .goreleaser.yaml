@@ -116,7 +116,6 @@ docker_signs:
     output: true
     args:
     - 'sign'
-    - '--key=cosign.key'
     - '${artifact}@${digest}'
     - "--yes"
 
