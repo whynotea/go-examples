@@ -11,6 +11,11 @@ build-%:
 release:
 	goreleaser release --snapshot --clean --skip-sbom --skip-sign
 
+mv-tag-%:
+	git push origin :refs/tags/$*
+	git tag -fa $*
+	git push origin $*
+
 .PHONY: clean
 clean:
 	rm -rf ./dist

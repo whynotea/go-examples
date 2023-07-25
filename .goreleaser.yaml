@@ -112,13 +112,12 @@ dockers:
 # https://goreleaser.com/customization/docker_sign
 docker_signs:
   - cmd: cosign
-    env:
-    - COSIGN_EXPERIMENTAL=1
     artifacts: images
     output: true
     args:
     - 'sign'
-    - '${artifact}'
+    - '--key=cosign.key'
+    - '${artifact}@${digest}'
     - "--yes"
 
 # Configure generation of a development full build snapshot
