@@ -20,12 +20,4 @@
 # Go workspace file
 go.work
 
-# Build directory
-build
-
-# Release directory
-release
-
-/test/version/version
-
 dist/

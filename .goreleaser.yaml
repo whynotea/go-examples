@@ -25,6 +25,24 @@ builds:
     ldflags:
       # disable symbol table (-s) and DWARF generation (-w)
       - -s -w -X main.Version={{.Version}}
+  - main: ./cmd/basic-cli
+    id: "basic-cli"
+    binary: "basic-cli"
+    goos:
+      - linux
+      - windows
+      - darwin
+    env:
+      - CGO_ENABLED=0
+    # ensures mod timestamp to be the commit timestamp
+    mod_timestamp: '{{ .CommitTimestamp }}'
+    flags:
+      # important for reproducible builds so full build paths and module paths
+      # are not embedded.
+      - -trimpath
+    ldflags:
+      # disable symbol table (-s) and DWARF generation (-w)
+      - -s -w -X main.Version={{.Version}}
 
 archives:
   - format: tar.gz
@@ -101,7 +119,7 @@ docker_signs:
     args:
     - 'sign'
     - '${artifact}'
-    - "--yes" # needed on cosign 2.0.0+
+    - "--yes"
 
 # Configure generation of a development full build snapshot
 snapshot:
