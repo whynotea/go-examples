@@ -61,6 +61,22 @@ builds:
     ldflags:
       # disable symbol table (-s) and DWARF generation (-w)
       - -s -w -X main.Version={{.Version}}
+  - main: ./cmd/nbbo
+    id: "nbbo"
+    binary: "nbbo"
+    goos:
+      - linux
+    env:
+      - CGO_ENABLED=0
+    # ensures mod timestamp to be the commit timestamp
+    mod_timestamp: '{{ .CommitTimestamp }}'
+    flags:
+      # important for reproducible builds so full build paths and module paths
+      # are not embedded.
+      - -trimpath
+    ldflags:
+      # disable symbol table (-s) and DWARF generation (-w)
+      - -s -w -X main.Version={{.Version}}
 
 archives:
   - format: tar.gz
